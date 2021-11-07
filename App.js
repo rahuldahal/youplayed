@@ -6,10 +6,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <SignUpScreen />
-      <StatusBar
-        animated={true}
-        backgroundColor="#ff0000"
-        />
+      <StatusBar animated={true} backgroundColor="#ff0000" />
     </View>
   );
 }
@@ -20,6 +17,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#f4f4f4',
-    padding: 4
+    padding: 4,
   },
 });
