@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import { View, Button, Text, Image, StyleSheet, TextInput } from 'react-native';
 import Heading from '../components/Heading';
+import { auth } from '../../App';
 
 export default function SignUpScreen() {
   const [name, onChangeName] = useState('');
   const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
+
+  async function signUpUser() {
+    const { user } = await auth.createUserWithEmailAndPassword(email, password);
+    console.log(user);
+  }
 
   return (
     <View style={styles.container}>
@@ -43,6 +49,7 @@ export default function SignUpScreen() {
           title="Sign Up"
           color="#ff0000"
           disabled={name && email && password ? false : true}
+          onPress={signUpUser}
         />
       </View>
 
