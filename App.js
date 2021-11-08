@@ -1,6 +1,9 @@
 import React from 'react';
 import { View, StyleSheet, StatusBar } from 'react-native';
 import SignUpScreen from './src/screens/SignUpScreen';
+import SignInScreen from './src/screens/SignInScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import {
@@ -26,20 +29,15 @@ export const app = firebase.initializeApp(firebaseConfig);
 export const auth = app.auth();
 
 export default function App() {
+  const Stack = createNativeStackNavigator();
+
   return (
-    <View style={styles.container}>
-      <SignUpScreen />
+    <NavigationContainer>
       <StatusBar animated={true} backgroundColor="#ff0000" />
-    </View>
+      <Stack.Navigator initialRouteName="SignUpScreen">
+        <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+        <Stack.Screen name="SignInScreen" component={SignInScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#f4f4f4',
-    padding: 4,
-  },
-});

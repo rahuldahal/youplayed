@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { View, Button, Text, Image, StyleSheet, TextInput } from 'react-native';
 import Heading from '../components/Heading';
 import { auth } from '../../App';
+import Link from '../components/Link';
 
-export default function SignUpScreen() {
+export default function SignUpScreen({ navigation }) {
   const [name, onChangeName] = useState('');
   const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
@@ -53,7 +54,12 @@ export default function SignUpScreen() {
         />
       </View>
 
-      <Text style={styles.muted}>Already have an account? Sign in</Text>
+      <Text style={styles.muted}>
+        Already have an account?{' '}
+        <Link navigation={navigation} to="SignInScreen">
+          Sign In
+        </Link>
+      </Text>
     </View>
   );
 }

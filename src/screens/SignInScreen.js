@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { View, Button, Text, Image, StyleSheet, TextInput } from 'react-native';
 import Heading from '../components/Heading';
+import Link from '../components/Link';
 
-export default function SignInScreen() {
+export default function SignInScreen({ navigation }) {
   const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
 
@@ -39,7 +40,12 @@ export default function SignInScreen() {
         />
       </View>
 
-      <Text style={styles.muted}>Don't have an account? Sign up</Text>
+      <Text style={styles.muted}>
+        Don't have an account?{' '}
+        <Link navigation={navigation} to="SignUpScreen">
+          Sign Up
+        </Link>
+      </Text>
     </View>
   );
 }
