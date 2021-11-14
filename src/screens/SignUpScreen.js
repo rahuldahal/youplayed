@@ -39,7 +39,7 @@ export default function SignUpScreen({ navigation }) {
           style={styles.input}
           onChangeText={onChangePassword}
           value={password}
-          keyboardType="visible-password"
+          keyboardType="default"
           secureTextEntry
           placeholder="Password"
         />
