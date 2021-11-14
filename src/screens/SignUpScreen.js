@@ -3,15 +3,18 @@ import { View, Button, Text, Image, StyleSheet, TextInput } from 'react-native';
 import Heading from '../components/Heading';
 import { auth } from '../../App';
 import Link from '../components/Link';
+import { useAuth } from '../contexts/AuthProvider';
 
 export default function SignUpScreen({ navigation }) {
   const [name, onChangeName] = useState('');
   const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
+  const [, setIsAuthenticated] = useAuth();
 
   async function signUpUser() {
     const { user } = await auth.createUserWithEmailAndPassword(email, password);
-    console.log(user);
+    // TODO: set user details in the state
+    setIsAuthenticated(true);
   }
 
   return (
