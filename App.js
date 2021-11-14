@@ -35,8 +35,16 @@ export default function App() {
     <NavigationContainer>
       <StatusBar animated={true} backgroundColor="#ff0000" />
       <Stack.Navigator initialRouteName="SignUpScreen">
-        <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
-        <Stack.Screen name="SignInScreen" component={SignInScreen} />
+        <Stack.Screen
+          name="SignUpScreen"
+          component={SignUpScreen}
+          options={{ title: 'Sign up' }}
+        />
+        <Stack.Screen
+          name="SignInScreen"
+          component={SignInScreen}
+          options={{ title: 'Sign in' }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
