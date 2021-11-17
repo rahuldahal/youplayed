@@ -3,6 +3,7 @@ import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 import {
   API_KEY,
   AUTH_DOMAIN,
@@ -26,6 +27,7 @@ const firebaseConfig = {
 
 export const app = firebase.initializeApp(firebaseConfig);
 export const auth = app.auth();
+export const db = app.firestore();
 
 export default function App() {
   return (

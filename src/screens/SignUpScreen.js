@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Button, Text, Image, StyleSheet, TextInput } from 'react-native';
 import Heading from '../components/Heading';
 import { auth } from '../../App';
+import { db } from '../../App';
 import Link from '../components/Link';
 import { useAuth } from '../contexts/AuthProvider';
 
@@ -13,8 +14,20 @@ export default function SignUpScreen({ navigation }) {
 
   async function signUpUser() {
     const { user } = await auth.createUserWithEmailAndPassword(email, password);
+    const data = {
+      fullname: name,
+      auth: user.uid,
+      createdAt: user.metadata.creationTime,
+      lastLoginAt: user.metadata.lastSignInTime,
+      avatar:
+        user.photoURL ||
+        `https://ui-avatars.com/api/?name=${encodeURIComponent(
+          name
+        )}&background=random`,
+    };
+    await db.collection('users').add(data);
     // TODO: set user details in the state
-    setIsAuthenticated(true);
+    // setIsAuthenticated(true);
   }
 
   return (
