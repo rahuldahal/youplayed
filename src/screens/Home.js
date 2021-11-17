@@ -5,10 +5,12 @@ import { useAuth } from '../contexts/AuthProvider';
 
 export default function Home() {
   const [user] = useAuth();
-  console.log(user);
   return (
     <View>
-      <Image source={{ uri: user.avatar }} />
+      <Image
+        style={{ width: 48, height: 48, borderRadius: 48 / 2 }}
+        source={{ uri: user.avatar }}
+      />
       <Heading size="1">Authenticated as {user.fullname}!</Heading>
       <Text>This is the main screen.</Text>
     </View>
