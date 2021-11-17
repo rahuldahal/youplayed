@@ -47,7 +47,7 @@ export default function SignInScreen({ navigation }) {
 
       <View style={styles.buttonWrapper}>
         <Button
-          title="Sign Up"
+          title="Sign In"
           color="#ff0000"
           disabled={email && password ? false : true}
           onPress={signInUser}
