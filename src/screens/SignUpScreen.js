@@ -26,8 +26,7 @@ export default function SignUpScreen({ navigation }) {
         )}&background=random`,
     };
     await db.collection('users').add(data);
-    // TODO: set user details in the state
-    // setIsAuthenticated(true);
+    setIsAuthenticated(data);
   }
 
   return (
