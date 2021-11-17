@@ -1,11 +1,24 @@
 import React, { useState } from 'react';
 import { View, Button, Text, Image, StyleSheet, TextInput } from 'react-native';
+import { auth, db } from '../../App';
 import Heading from '../components/Heading';
 import Link from '../components/Link';
+import { useAuth } from '../contexts/AuthProvider';
 
 export default function SignInScreen({ navigation }) {
   const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
+  const [, setIsAuthenticated] = useAuth();
+
+  async function signInUser() {
+    const { user } = await auth.signInWithEmailAndPassword(email, password);
+    const { docs } = await db
+      .collection('users')
+      .where('auth', '==', user.uid)
+      .get();
+    const data = docs[0].data();
+    setIsAuthenticated(data);
+  }
 
   return (
     <View style={styles.container}>
@@ -37,6 +50,7 @@ export default function SignInScreen({ navigation }) {
           title="Sign Up"
           color="#ff0000"
           disabled={email && password ? false : true}
+          onPress={signInUser}
         />
       </View>
 
