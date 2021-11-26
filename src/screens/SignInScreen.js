@@ -11,13 +11,17 @@ export default function SignInScreen({ navigation }) {
   const [, setIsAuthenticated] = useAuth();
 
   async function signInUser() {
-    const { user } = await auth.signInWithEmailAndPassword(email, password);
-    const { docs } = await db
-      .collection('users')
-      .where('auth', '==', user.uid)
-      .get();
-    const data = docs[0].data();
-    setIsAuthenticated(data);
+    try {
+      const { user } = await auth.signInWithEmailAndPassword(email, password);
+      const { docs } = await db
+        .collection('users')
+        .where('auth', '==', user.uid)
+        .get();
+      const data = docs[0].data();
+      setIsAuthenticated(data);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   return (

@@ -13,20 +13,27 @@ export default function SignUpScreen({ navigation }) {
   const [, setIsAuthenticated] = useAuth();
 
   async function signUpUser() {
-    const { user } = await auth.createUserWithEmailAndPassword(email, password);
-    const data = {
-      fullname: name,
-      auth: user.uid,
-      createdAt: user.metadata.creationTime,
-      lastLoginAt: user.metadata.lastSignInTime,
-      avatar:
-        user.photoURL ||
-        `https://ui-avatars.com/api/?name=${encodeURIComponent(
-          name
-        )}&background=random`,
-    };
-    await db.collection('users').add(data);
-    setIsAuthenticated(data);
+    try {
+      const { user } = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+      const data = {
+        fullname: name,
+        auth: user.uid,
+        createdAt: user.metadata.creationTime,
+        lastLoginAt: user.metadata.lastSignInTime,
+        avatar:
+          user.photoURL ||
+          `https://ui-avatars.com/api/?name=${encodeURIComponent(
+            name
+          )}&background=random`,
+      };
+      await db.collection('users').add(data);
+      setIsAuthenticated(data);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   return (
