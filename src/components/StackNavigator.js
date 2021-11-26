@@ -7,14 +7,15 @@ import SignUpScreen from '../screens/SignUpScreen';
 
 export default function StackNavigator() {
   const Stack = createNativeStackNavigator();
-  const [isAuthenticated] = useAuth();
+  const [user] = useAuth();
+
   return (
     <Stack.Navigator>
-      {isAuthenticated ? (
+      {user ? (
         <Stack.Screen
           name="Home"
           component={Home}
-          options={{ title: 'Home' }}
+          options={() => ({ title: user.fullname })}
         />
       ) : (
         <>
