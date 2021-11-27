@@ -52,7 +52,7 @@ export default function FormField({
 
 const styles = StyleSheet.create({
   formField: {
-    marginVertical: 8,
+    marginVertical: 4,
     position: 'relative',
   },
   formLabel: {
