@@ -4,6 +4,8 @@ import { useAuth } from '../contexts/AuthProvider';
 import Home from '../screens/Home';
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
+import AvatarMenu from './AvatarMenu';
+import { Button } from 'react-native';
 
 export default function StackNavigator() {
   const Stack = createNativeStackNavigator();
@@ -15,7 +17,10 @@ export default function StackNavigator() {
         <Stack.Screen
           name="Home"
           component={Home}
-          options={() => ({ title: user.fullname })}
+          options={{
+            headerTitle: () => <AvatarMenu uri={user.avatar} />,
+            headerStyle: { backgroundColor: '#FF0000' },
+          }}
         />
       ) : (
         <>
