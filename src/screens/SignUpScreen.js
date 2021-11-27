@@ -6,6 +6,7 @@ import { db } from '../../App';
 import Link from '../components/Link';
 import { useAuth } from '../contexts/AuthProvider';
 import FormField from '../components/FormField';
+import Scrollable from '../components/Scrollable';
 
 export default function SignUpScreen({ navigation }) {
   const [name, onChangeName] = useState('');
@@ -38,48 +39,50 @@ export default function SignUpScreen({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
-      <Image source={require('../assets/icon.png')} />
-      <Heading size="1">Sign up!</Heading>
-      <Text style={styles.muted}>
-        Please fill up the form below to continue.
-      </Text>
-      <View style={styles.form}>
-        <FormField
-          label="Fullname"
-          currentState={name}
-          setState={onChangeName}
-        />
-        <FormField
-          label="Email"
-          type="email"
-          currentState={email}
-          setState={onChangeEmail}
-        />
-        <FormField
-          label="Password"
-          type="password"
-          currentState={password}
-          setState={onChangePassword}
-        />
-      </View>
+    <Scrollable>
+      <View style={styles.container}>
+        <Image source={require('../assets/icon.png')} />
+        <Heading size="1">Sign up!</Heading>
+        <Text style={styles.muted}>
+          Please fill up the form below to continue.
+        </Text>
+        <View style={styles.form}>
+          <FormField
+            label="Fullname"
+            currentState={name}
+            setState={onChangeName}
+          />
+          <FormField
+            label="Email"
+            type="email"
+            currentState={email}
+            setState={onChangeEmail}
+          />
+          <FormField
+            label="Password"
+            type="password"
+            currentState={password}
+            setState={onChangePassword}
+          />
+        </View>
 
-      <View style={styles.buttonWrapper}>
-        <Button
-          title="Sign Up"
-          color="#ff0000"
-          disabled={name && email && password ? false : true}
-          onPress={signUpUser}
-        />
-      </View>
+        <View style={styles.buttonWrapper}>
+          <Button
+            title="Sign Up"
+            color="#ff0000"
+            disabled={name && email && password ? false : true}
+            onPress={signUpUser}
+          />
+        </View>
 
-      <Text style={styles.muted}>
-        Already have an account?{' '}
-        <Link navigation={navigation} to="SignInScreen">
-          Sign In
-        </Link>
-      </Text>
-    </View>
+        <Text style={styles.muted}>
+          Already have an account?{' '}
+          <Link navigation={navigation} to="SignInScreen">
+            Sign In
+          </Link>
+        </Text>
+      </View>
+    </Scrollable>
   );
 }
 

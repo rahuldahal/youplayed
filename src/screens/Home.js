@@ -4,6 +4,7 @@ import { auth } from '../../App';
 import Heading from '../components/Heading';
 import { useAuth } from '../contexts/AuthProvider';
 import { YOUTUBE_DATA_API } from '@env';
+import Scrollable from '../components/Scrollable';
 
 export default function Home() {
   const [user] = useAuth();
@@ -28,21 +29,23 @@ export default function Home() {
   }
 
   return (
-    <View>
-      <Image
-        style={{ width: 48, height: 48, borderRadius: 48 / 2 }}
-        source={{ uri: user.avatar }}
-      />
-      <Heading size="1">Authenticated as {user.fullname}!</Heading>
-      <Text>This is the main screen.</Text>
-      <TextInput
-        onChangeText={onChangeChannelName}
-        value={channelName}
-        keyboardType="default"
-        placeholder="Channel Name"
-      />
-      <Button title="Search Channel" onPress={fetchChannel} />
-      <Button title="Logout" onPress={signOut} />
-    </View>
+    <Scrollable>
+      <View>
+        <Image
+          style={{ width: 48, height: 48, borderRadius: 48 / 2 }}
+          source={{ uri: user.avatar }}
+        />
+        <Heading size="1">Authenticated as {user.fullname}!</Heading>
+        <Text>This is the main screen.</Text>
+        <TextInput
+          onChangeText={onChangeChannelName}
+          value={channelName}
+          keyboardType="default"
+          placeholder="Channel Name"
+        />
+        <Button title="Search Channel" onPress={fetchChannel} />
+        <Button title="Logout" onPress={signOut} />
+      </View>
+    </Scrollable>
   );
 }
