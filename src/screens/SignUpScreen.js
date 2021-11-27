@@ -5,6 +5,7 @@ import { auth } from '../../App';
 import { db } from '../../App';
 import Link from '../components/Link';
 import { useAuth } from '../contexts/AuthProvider';
+import FormField from '../components/FormField';
 
 export default function SignUpScreen({ navigation }) {
   const [name, onChangeName] = useState('');
@@ -44,26 +45,22 @@ export default function SignUpScreen({ navigation }) {
         Please fill up the form below to continue.
       </Text>
       <View style={styles.form}>
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeName}
-          value={name}
-          placeholder="Full Name"
+        <FormField
+          label="Fullname"
+          currentState={name}
+          setState={onChangeName}
         />
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeEmail}
-          value={email}
-          keyboardType="email-address"
-          placeholder="Email"
+        <FormField
+          label="Email"
+          type="email"
+          currentState={email}
+          setState={onChangeEmail}
         />
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangePassword}
-          value={password}
-          keyboardType="default"
-          secureTextEntry
-          placeholder="Password"
+        <FormField
+          label="Password"
+          type="password"
+          currentState={password}
+          setState={onChangePassword}
         />
       </View>
 

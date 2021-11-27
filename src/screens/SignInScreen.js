@@ -4,11 +4,12 @@ import { auth, db } from '../../App';
 import Heading from '../components/Heading';
 import Link from '../components/Link';
 import { useAuth } from '../contexts/AuthProvider';
+import FormField from '../components/FormField';
 
 export default function SignInScreen({ navigation }) {
+  const [, setIsAuthenticated] = useAuth();
   const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
-  const [, setIsAuthenticated] = useAuth();
 
   async function signInUser() {
     try {
@@ -32,23 +33,19 @@ export default function SignInScreen({ navigation }) {
         Please fill up the form below to continue.
       </Text>
       <View style={styles.form}>
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeEmail}
-          value={email}
-          keyboardType="email-address"
-          placeholder="Email"
+        <FormField
+          label="Email"
+          type="email"
+          currentState={email}
+          setState={onChangeEmail}
         />
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangePassword}
-          value={password}
-          keyboardType="default"
-          secureTextEntry
-          placeholder="Password"
+        <FormField
+          label="Password"
+          type="password"
+          currentState={password}
+          setState={onChangePassword}
         />
       </View>
-
       <View style={styles.buttonWrapper}>
         <Button
           title="Sign In"
@@ -83,11 +80,5 @@ const styles = StyleSheet.create({
   buttonWrapper: {
     width: 300,
     marginVertical: 32,
-  },
-  input: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#ff0000',
-    width: 300,
-    padding: 4,
   },
 });
