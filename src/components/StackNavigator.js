@@ -5,11 +5,17 @@ import Home from '../screens/Home';
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import AvatarMenu from './AvatarMenu';
-import { Button } from 'react-native';
+import { Dimensions } from 'react-native';
 
 export default function StackNavigator() {
   const Stack = createNativeStackNavigator();
   const [user] = useAuth();
+  const headerStyle = {
+    backgroundColor: '#ff0000',
+  };
+  const headerTitleStyle = {
+    color: '#ffffff',
+  };
 
   return (
     <Stack.Navigator>
@@ -19,7 +25,7 @@ export default function StackNavigator() {
           component={Home}
           options={{
             headerTitle: () => <AvatarMenu uri={user.avatar} />,
-            headerStyle: { backgroundColor: '#FF0000' },
+            headerStyle,
           }}
         />
       ) : (
@@ -27,12 +33,12 @@ export default function StackNavigator() {
           <Stack.Screen
             name="SignInScreen"
             component={SignInScreen}
-            options={{ title: 'Sign in' }}
+            options={{ title: 'Sign in', headerStyle, headerTitleStyle }}
           />
           <Stack.Screen
             name="SignUpScreen"
             component={SignUpScreen}
-            options={{ title: 'Sign up' }}
+            options={{ title: 'Sign up', headerStyle, headerTitleStyle }}
           />
         </>
       )}
