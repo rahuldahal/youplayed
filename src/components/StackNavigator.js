@@ -1,10 +1,10 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useAuth } from '../contexts/AuthProvider';
-import Home from '../screens/Home';
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import { Image } from 'react-native';
+import Feed from '../screens/Feed';
 
 export default function StackNavigator() {
   const Stack = createNativeStackNavigator();
@@ -24,7 +24,7 @@ export default function StackNavigator() {
   return (
     <Stack.Navigator>
       {user ? (
-        <Stack.Screen name="Home" component={Home} options={options} />
+        <Stack.Screen name="Feed" component={Feed} options={options} />
       ) : (
         <>
           <Stack.Screen
