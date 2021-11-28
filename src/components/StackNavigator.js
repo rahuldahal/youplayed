@@ -4,41 +4,38 @@ import { useAuth } from '../contexts/AuthProvider';
 import Home from '../screens/Home';
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
-import AvatarMenu from './AvatarMenu';
-import { Dimensions } from 'react-native';
+import { Image } from 'react-native';
 
 export default function StackNavigator() {
   const Stack = createNativeStackNavigator();
   const [user] = useAuth();
-  const headerStyle = {
-    backgroundColor: '#ff0000',
-  };
-  const headerTitleStyle = {
-    color: '#ffffff',
+  const options = {
+    headerTitle: () => (
+      <Image
+        source={require('../assets/icon.png')}
+        style={{ width: 48, height: 32 }}
+      />
+    ),
+    headerStyle: {
+      backgroundColor: '#ff0000',
+    },
   };
 
   return (
     <Stack.Navigator>
       {user ? (
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{
-            headerTitle: () => <AvatarMenu uri={user.avatar} />,
-            headerStyle,
-          }}
-        />
+        <Stack.Screen name="Home" component={Home} options={options} />
       ) : (
         <>
           <Stack.Screen
             name="SignInScreen"
             component={SignInScreen}
-            options={{ title: 'Sign in', headerStyle, headerTitleStyle }}
+            options={options}
           />
           <Stack.Screen
             name="SignUpScreen"
             component={SignUpScreen}
-            options={{ title: 'Sign up', headerStyle, headerTitleStyle }}
+            options={options}
           />
         </>
       )}
