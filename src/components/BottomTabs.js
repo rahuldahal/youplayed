@@ -5,16 +5,30 @@ import Explore from '../screens/Explore';
 import Home from '../screens/Home';
 import WatchLater from '../screens/WatchLater';
 import Profile from '../screens/Profile';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const Tab = createBottomTabNavigator();
 
 export default function BottomTabs() {
+  const routeIconMap = {
+    Subscriptions: 'subscriptions',
+    Explore: 'explore',
+    Home: 'home',
+    'Watch Later': 'watch-later',
+    Profile: 'person',
+  };
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      screenOptions={{
+      screenOptions={({ route }) => ({
         headerShown: false,
-      }}
+        tabBarIcon: ({ focused }) => {
+          const iconName = routeIconMap[route.name];
+          const iconColor = focused ? '#ff0000' : '#000000';
+
+          return <MaterialIcons name={iconName} size={24} color={iconColor} />;
+        },
+      })}
     >
       <Tab.Screen name="Subscriptions" component={Subscriptions} />
       <Tab.Screen name="Explore" component={Explore} />
