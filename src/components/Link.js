@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, Button } from 'react-native';
+import colors from '../colors';
 
 export default function Link({ navigation, to, type = 'text', children }) {
   function navigate() {
@@ -12,10 +13,10 @@ export default function Link({ navigation, to, type = 'text', children }) {
     <Text
       onPress={navigate}
       style={{
-        color: '#ff0000',
+        color: colors.red,
         textDecorationStyle: 'solid',
         textDecorationLine: 'underline',
-        textDecorationColor: '#ff0000',
+        textDecorationColor: colors.red,
       }}
     >
       {children}

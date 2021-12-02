@@ -5,6 +5,7 @@ import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import { Image } from 'react-native';
 import Feed from '../screens/Feed';
+import colors from '../colors';
 
 export default function StackNavigator() {
   const Stack = createNativeStackNavigator();
@@ -17,7 +18,7 @@ export default function StackNavigator() {
       />
     ),
     headerStyle: {
-      backgroundColor: '#ff0000',
+      backgroundColor: colors.red,
     },
   };
 

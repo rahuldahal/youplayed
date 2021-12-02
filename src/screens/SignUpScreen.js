@@ -7,6 +7,7 @@ import Link from '../components/Link';
 import { useAuth } from '../contexts/AuthProvider';
 import FormField from '../components/FormField';
 import Scrollable from '../components/Scrollable';
+import colors from '../colors';
 
 export default function SignUpScreen({ navigation }) {
   const [name, onChangeName] = useState('');
@@ -69,7 +70,7 @@ export default function SignUpScreen({ navigation }) {
         <View style={styles.buttonWrapper}>
           <Button
             title="Sign Up"
-            color="#ff0000"
+            color={colors.red}
             disabled={name && email && password ? false : true}
             onPress={signUpUser}
           />
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   muted: {
-    color: 'grey',
+    color: colors.redishGrey,
   },
   form: {
     marginTop: 32,
@@ -104,7 +105,7 @@ const styles = StyleSheet.create({
   },
   input: {
     borderBottomWidth: 1,
-    borderBottomColor: '#ff0000',
+    borderBottomColor: colors.red,
     width: 300,
     padding: 4,
   },

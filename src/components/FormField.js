@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Animated, StyleSheet, Text, TextInput, View } from 'react-native';
+import colors from '../colors';
 
 export default function FormField({
   label,
@@ -33,7 +34,12 @@ export default function FormField({
   return (
     <View style={styles.formField}>
       <Animated.View style={{ transform: [{ translateY: translationValue }] }}>
-        <Text style={{ color: currentState ? 'red' : 'grey', fontSize: 18 }}>
+        <Text
+          style={{
+            color: currentState ? colors.red : colors.redishGrey,
+            fontSize: 18,
+          }}
+        >
           {label}
         </Text>
       </Animated.View>
@@ -56,11 +62,11 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   formLabel: {
-    color: 'grey',
+    color: colors.redishGrey,
   },
   input: {
     borderBottomWidth: 1,
-    borderBottomColor: '#ff0000',
+    borderBottomColor: colors.red,
     width: 300,
     padding: 4,
   },

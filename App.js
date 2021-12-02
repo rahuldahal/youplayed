@@ -15,6 +15,7 @@ import {
 } from '@env';
 import { AuthProvider } from './src/contexts/AuthProvider';
 import StackNavigator from './src/components/StackNavigator';
+import colors from './src/colors';
 const firebaseConfig = {
   apiKey: API_KEY,
   authDomain: AUTH_DOMAIN,
@@ -33,7 +34,7 @@ export default function App() {
   return (
     <AuthProvider>
       <NavigationContainer>
-        <StatusBar animated={true} backgroundColor="#ff0000" />
+        <StatusBar animated={true} backgroundColor={colors.red} />
         <StackNavigator />
       </NavigationContainer>
     </AuthProvider>

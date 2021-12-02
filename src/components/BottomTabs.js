@@ -6,6 +6,7 @@ import Home from '../screens/Home';
 import WatchLater from '../screens/WatchLater';
 import Profile from '../screens/Profile';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import colors from '../colors';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,7 +25,7 @@ export default function BottomTabs() {
         headerShown: false,
         tabBarIcon: ({ focused }) => {
           const iconName = routeIconMap[route.name];
-          const iconColor = focused ? '#ff0000' : '#000000';
+          const iconColor = focused ? colors.red : colors.redishBlack;
 
           return <MaterialIcons name={iconName} size={24} color={iconColor} />;
         },

@@ -6,6 +6,7 @@ import Link from '../components/Link';
 import { useAuth } from '../contexts/AuthProvider';
 import FormField from '../components/FormField';
 import Scrollable from '../components/Scrollable';
+import colors from '../colors';
 
 export default function SignInScreen({ navigation }) {
   const [, setIsAuthenticated] = useAuth();
@@ -51,7 +52,7 @@ export default function SignInScreen({ navigation }) {
         <View style={styles.buttonWrapper}>
           <Button
             title="Sign In"
-            color="#ff0000"
+            color={colors.red}
             disabled={email && password ? false : true}
             onPress={signInUser}
           />
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   muted: {
-    color: 'grey',
+    color: colors.redishGrey,
   },
   form: {
     marginTop: 32,
