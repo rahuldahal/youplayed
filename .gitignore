@@ -1,4 +1,5 @@
 node_modules/
+notes.js
 .env
 .expo/
 dist/
