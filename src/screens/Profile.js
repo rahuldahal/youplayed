@@ -1,14 +1,14 @@
 import React from 'react';
 import { Button, Text, View } from 'react-native';
+import { auth } from '../../App';
 import { useAuth } from '../contexts/AuthProvider';
 
 export default function Profile() {
-  const [user] = useAuth();
-  const [, setIsAuthenticated] = useAuth();
+  const [user, setUser] = useAuth();
 
   async function signOut() {
     await auth.signOut();
-    setIsAuthenticated(false);
+    setUser(null);
   }
 
   return (

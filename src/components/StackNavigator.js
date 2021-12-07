@@ -9,7 +9,7 @@ import colors from '../colors';
 
 export default function StackNavigator() {
   const Stack = createNativeStackNavigator();
-  const [user] = useAuth();
+  const [token] = useAuth();
   const options = {
     headerTitle: () => (
       <Image
@@ -24,7 +24,7 @@ export default function StackNavigator() {
 
   return (
     <Stack.Navigator>
-      {user ? (
+      {token ? (
         <Stack.Screen name="Feed" component={Feed} options={options} />
       ) : (
         <>

@@ -33,7 +33,7 @@ export default function SignUpScreen({ navigation }) {
           )}&background=random`,
       };
       await db.collection('users').add(data);
-      setIsAuthenticated(data);
+      setIsAuthenticated({ data });
     } catch (e) {
       console.log(e);
     }

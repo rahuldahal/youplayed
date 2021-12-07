@@ -21,7 +21,7 @@ export default function SignInScreen({ navigation }) {
         .where('auth', '==', user.uid)
         .get();
       const data = docs[0].data();
-      setIsAuthenticated(data);
+      setIsAuthenticated({ data });
     } catch (e) {
       console.log(e);
     }
