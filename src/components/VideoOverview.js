@@ -8,63 +8,65 @@ export default function VideoOverview({ stats, image, title, channelName }) {
 
   return (
     <View style={styles.container}>
-      <ImageBackground
-        source={{ uri: image }}
-        resizeMode="cover"
-        style={styles.bgImage}
-      >
-        <View
-          style={[
-            styles.textWithIcon,
-            styles.duration,
-            { backgroundColor: colors.redishWhite },
-          ]}
+      <View style={styles.bgWrapper}>
+        <ImageBackground
+          source={{ uri: image }}
+          resizeMode="cover"
+          style={styles.bgImage}
         >
-          <MaterialIcons
-            style={styles.icon}
-            name="access-time"
-            size={18}
-            color={colors.red}
-          />
-          <Text>{duration}</Text>
-        </View>
-
-        <View
-          style={[styles.overview, { backgroundColor: colors.redishWhite }]}
-        >
-          <View style={styles.stats}>
-            <View style={[styles.textWithIcon, styles.stat]}>
-              <MaterialIcons
-                style={styles.icon}
-                name="remove-red-eye"
-                size={18}
-                color={colors.red}
-              />
-              <Text>{viewsCount}</Text>
-            </View>
-
-            <View style={[styles.textWithIcon, styles.stat]}>
-              <MaterialIcons
-                style={styles.icon}
-                name="thumb-up"
-                size={18}
-                color={colors.red}
-              />
-              <Text>{likesCount}</Text>
-            </View>
-          </View>
-
-          <View style={[styles.textWithIcon, styles.channelName]}>
+          <View
+            style={[
+              styles.textWithIcon,
+              styles.duration,
+              { backgroundColor: colors.redishWhite },
+            ]}
+          >
             <MaterialIcons
               style={styles.icon}
-              name="subscriptions"
+              name="access-time"
               size={18}
               color={colors.red}
             />
-            <Text>{channelName}</Text>
+            <Text>{duration}</Text>
           </View>
-        </View>
-      </ImageBackground>
+
+          <View
+            style={[styles.overview, { backgroundColor: colors.redishWhite }]}
+          >
+            <View style={styles.stats}>
+              <View style={[styles.textWithIcon, styles.stat]}>
+                <MaterialIcons
+                  style={styles.icon}
+                  name="remove-red-eye"
+                  size={18}
+                  color={colors.red}
+                />
+                <Text>{viewsCount}</Text>
+              </View>
+
+              <View style={[styles.textWithIcon, styles.stat]}>
+                <MaterialIcons
+                  style={styles.icon}
+                  name="thumb-up"
+                  size={18}
+                  color={colors.red}
+                />
+                <Text>{likesCount}</Text>
+              </View>
+            </View>
+
+            <View style={[styles.textWithIcon, styles.channelName]}>
+              <MaterialIcons
+                style={styles.icon}
+                name="subscriptions"
+                size={18}
+                color={colors.red}
+              />
+              <Text>{channelName}</Text>
+            </View>
+          </View>
+        </ImageBackground>
+      </View>
       <Text
         style={[
           styles.title,
@@ -82,7 +84,6 @@ const styles = StyleSheet.create({
     position: 'relative',
     width: '100%',
     borderRadius: 8,
-    // TODO: overflow: 'hidden',
     marginBottom: 80,
     shadowColor: '#000',
     shadowOffset: {
@@ -93,6 +94,11 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
 
     elevation: 5,
+  },
+  bgWrapper: {
+    borderRadius: 8,
+    borderBottomLeftRadius: 0,
+    overflow: 'hidden',
   },
   bgImage: {
     width: '100%',
@@ -124,6 +130,7 @@ const styles = StyleSheet.create({
     width: '90%',
     padding: 16,
     borderTopLeftRadius: 18,
+    borderBottomRightRadius: 8,
   },
   stats: {
     display: 'flex',
@@ -140,5 +147,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     borderBottomRightRadius: 8,
+    borderBottomLeftRadius: 8,
   },
 });
