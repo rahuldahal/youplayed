@@ -1,19 +1,64 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Button, Text, Image, StyleSheet, TextInput } from 'react-native';
 import { auth } from '../../App';
 import Heading from '../components/Heading';
 import { useAuth } from '../contexts/AuthProvider';
-import { YOUTUBE_DATA_API } from '@env';
+import { YOUTUBE_DATA_API, IP_DETAILS_API } from '@env';
 import Scrollable from '../components/Scrollable';
 import colors from '../colors';
 import VideoOverview from '../components/VideoOverview';
 
 export default function Home() {
-  const stats = {
-    duration: '1h 45min',
-    likesCount: '3.4K',
-    viewsCount: '1.4M',
-  };
+  const [IPDetails, setIPDetails] = useState(null);
+  const [trendingVideos, setTrendingVideos] = useState(null);
+
+  function videoOverview(items) {
+    return items.map((item) => {
+      const { publishedAt, channelId, title, thumbnails, channelTitle } =
+        item.snippet;
+      const { duration } = item.contentDetails;
+      const { viewCount, likeCount, commentCount } = item.statistics;
+      return {
+        id: item.id,
+        publishedAt,
+        channelId,
+        title,
+        thumbnails,
+        channelTitle,
+        duration,
+        viewCount,
+        likeCount,
+        commentCount,
+      };
+    });
+  }
+
+  useEffect(() => {
+    (async function () {
+      try {
+        const res = await fetch(IP_DETAILS_API);
+        const details = await res.json();
+        setIPDetails(details);
+      } catch (e) {
+        console.log(e);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    IPDetails &&
+      (async function () {
+        try {
+          const res = await fetch(
+            `https://www.googleapis.com/youtube/v3/videos?chart=mostPopular&part=snippet,statistics,contentDetails&maxResults=10&regionCode=${IPDetails.countryCode}&key=${YOUTUBE_DATA_API}`
+          );
+          const { items } = await res.json();
+          setTrendingVideos(videoOverview(items));
+        } catch (e) {
+          console.log(e);
+        }
+      })();
+  }, [IPDetails]);
 
   return (
     <Scrollable>
@@ -26,24 +71,32 @@ export default function Home() {
         </View>
 
         <View style={styles.videos}>
-          <VideoOverview
-            stats={stats}
-            title="Sample Video Title"
-            channelName="Sample Channel"
-            image="https://picsum.photos/1280/720"
-          />
-          <VideoOverview
-            stats={stats}
-            title="How to this"
-            channelName="How tos"
-            image="https://picsum.photos/1280/720"
-          />
-          <VideoOverview
-            stats={stats}
-            title="Learn x in y hours"
-            channelName="The Learners"
-            image="https://picsum.photos/1280/720"
-          />
+          {trendingVideos ? (
+            trendingVideos.map((overview) => {
+              const {
+                id,
+                duration,
+                viewCount,
+                likeCount,
+                title,
+                channelTitle,
+                thumbnails,
+              } = overview;
+              return (
+                <VideoOverview
+                  key={id}
+                  duration={duration}
+                  viewCount={viewCount}
+                  likeCount={likeCount}
+                  title={title}
+                  channelName={channelTitle}
+                  image={thumbnails.standard.url}
+                />
+              );
+            })
+          ) : (
+            <Text>Loading...</Text>
+          )}
         </View>
       </View>
     </Scrollable>

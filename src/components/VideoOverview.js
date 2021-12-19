@@ -3,8 +3,37 @@ import { ImageBackground, View, StyleSheet, Text } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import colors from '../colors';
 
-export default function VideoOverview({ stats, image, title, channelName }) {
-  const { duration, viewsCount, likesCount } = stats;
+function formatDuration(duration) {
+  return duration
+    .match(/([0-9][0-9]?H?M?S?)/g)
+    .map((e) => e.toLowerCase())
+    .join(' ');
+}
+
+function countStats(views) {
+  const { length } = views.toString().split('');
+  if (length < 4) {
+    return views.toString();
+  } else if (length <= 6) {
+    return `${Math.round(views / 1000)}K`;
+  } else if (length <= 9) {
+    return `${(views / 1000000).toFixed(1)}M`;
+  } else {
+    return `${(views / 1000000000).toFixed(1)}B`;
+  }
+}
+
+export default function VideoOverview({
+  duration,
+  viewCount,
+  likeCount,
+  image,
+  title,
+  channelName,
+}) {
+  const formattedDuration = formatDuration(duration);
+  const formattedViews = countStats(viewCount);
+  const formattedLikes = countStats(likeCount);
 
   return (
     <View style={styles.container}>
@@ -27,7 +56,7 @@ export default function VideoOverview({ stats, image, title, channelName }) {
               size={18}
               color={colors.red}
             />
-            <Text>{duration}</Text>
+            <Text>{formattedDuration}</Text>
           </View>
 
           <View
@@ -41,7 +70,7 @@ export default function VideoOverview({ stats, image, title, channelName }) {
                   size={18}
                   color={colors.red}
                 />
-                <Text>{viewsCount}</Text>
+                <Text>{formattedViews}</Text>
               </View>
 
               <View style={[styles.textWithIcon, styles.stat]}>
@@ -51,7 +80,7 @@ export default function VideoOverview({ stats, image, title, channelName }) {
                   size={18}
                   color={colors.red}
                 />
-                <Text>{likesCount}</Text>
+                <Text>{formattedLikes}</Text>
               </View>
             </View>
 
